@@ -7,7 +7,9 @@ x = 0
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     while x < 10:
-        s.sendall(b"ping")
+        message = b"ping"
+        print(f"Sending {message!r}")
+        s.sendall(message)
         data = s.recv(1024)
         print(f"Received {data!r}")
         x += 1
