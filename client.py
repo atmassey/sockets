@@ -1,8 +1,15 @@
 import socket
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
+log_handler = TimedRotatingFileHandler("client.log", when="midnight", interval=1)
+log_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+log_handler.setFormatter(log_formatter)
+logger = logging.getLogger()
+logger.addHandler(log_handler)
+logger.setLevel(logging.INFO)
 HOST = "127.0.0.1"  # The server's hostname or IP address
-PORT = 65436  # The port used by the server
+PORT = 65437  # The port used by the server
 logging.info(f"Starting up on {HOST} port {PORT}")
 x = 0
 try:

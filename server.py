@@ -1,6 +1,13 @@
 import socket
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
+log_handler = TimedRotatingFileHandler("server.log", when="midnight", interval=1)
+log_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+log_handler.setFormatter(log_formatter)
+logger = logging.getLogger()
+logger.addHandler(log_handler)
+logger.setLevel(logging.INFO)
 HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
 PORT = 65437  # Port to listen on (non-privileged ports are > 1023)
 try:
